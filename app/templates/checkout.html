@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/checkout.js') }}"></script>
+{% endblock %}
+
+{% block title %}Thanks{% endblock %}
+
+{% block main %}
+<div class="container">
+    <div id="checkout-instructions">
+	    {% block instructions %}{% endblock %}
+    </div>
+    <div id="receipt">
+        <h2>Verification Code:</h2>
+        <p id="receipt-verification-code">{{ verification_code }}</p>
+        <h2>Time Cast:</h2>
+        <p id="receipt-timestamp">{{ time }}</p>
+    </div>
+    <div>
+        <button onclick="copy_element_text_by_id('receipt-verification-code')">Copy Code to Clipboard</button>
+        <button onclick="download_receipt_as_file()">Download Receipt as File</button>
+    </div>
+</div>
+{% endblock %}

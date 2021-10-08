@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/vote.js') }}"></script>
+{% endblock %}
+
+{% block title %}Vote{% endblock %}
+
+{% block main %}
+<div class="container">
+    <form id="ballot-form" action="{{ url_for('submit') }}" method="POST">
+        {% for contest in ballot["contests"] %}
+        <div class="contest-container">
+            <fieldset class="contest">
+                <legend>{{ contest["name"] }}</legend>
+                <div class="ballot-candidates">
+                    {% for candidate in contest["candidates"] %}
+                    <div class="ballot-candidate">
+                        <input class ="candidate-radio" type="radio" name="{{ contest['object_id'] }}" value="{{ candidate['object_id'] }}" id="{{ candidate['object_id'] }}" onclick="fillClosestContestContainer(id)">
+                        <label class="candidate-radio-label" for="{{ candidate['object_id'] }}">{{ candidate["name"] }} (party: {{ candidate["party"] }})</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </fieldset>
+        </div>
+        {% endfor %}
+        <input class="form-submit" type="submit" value="Vote">
+    </form>
+</div>
+{% endblock %}

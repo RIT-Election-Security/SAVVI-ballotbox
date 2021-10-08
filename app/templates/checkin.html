@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Checkin{% endblock %}
+
+{% block main %}
+<div class="container">
+    {% for message in get_flashed_messages() %}
+    <div class="alert">{{ message }}</div>
+    {% endfor %}
+    <form id="checkin-form" action="{{ url_for('checkin') }}" method="POST">
+	    <textarea type="text" id="token" name="token" placeholder="token" rows="10" cols="33"></textarea>
+        <input class="form-submit" type="submit" value="Check In">
+    </form>
+</div>
+{% endblock %}

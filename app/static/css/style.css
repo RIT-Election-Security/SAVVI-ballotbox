@@ -1,0 +1,177 @@
+body {
+  width: 100vw;
+  height: 90vh;
+  margin: 0;
+}
+
+button {
+  padding: 0.5em 2em;
+}
+
+p {
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.container {
+  height: 50%;
+  margin: 5%;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.alert {
+  background-color: crimson;
+  color: white;
+
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.form-input {
+  width: 75%;
+  height: 2em;
+  margin-bottom: 2em;
+}
+
+.link-button {
+  display: inline-block;
+  padding: 1em 3em;
+  border-radius: 5px;
+  margin: 0em 1em;
+  text-decoration: none;
+  background-color: deepskyblue;
+  color: white;
+}
+
+.link-button:hover {
+  background-color: skyblue;
+}
+
+.form-submit {
+  margin-top: 1em;
+  padding: .5em 1em .5em;
+}
+
+.contest-container {
+  padding: 2%;
+  margin: 1%;
+
+  border-radius: 2%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.ballot-candidates {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.ballot-candidate {
+  margin: 1% 0%;
+}
+
+.ballot-selection {
+  border: 3px solid black;
+  padding: 1% 5%;
+}
+
+.progress-stage {
+  background-color: lightslategrey;
+  color: white;
+  width: 7.5em;
+  border-radius: 0% 50% 50% 0%;
+  padding: 3px 7px 3px 3px;
+  text-align: center;
+}
+
+#progressbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: deepskyblue;
+
+  width: 100%;
+  height: 10%;
+}
+
+#current-stage {
+  background-color: goldenrod;
+  color: black;
+}
+
+#checkin-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: deepskyblue;
+  color: white;
+
+  height: 25%;
+  width: 30%;
+  margin: 1%;
+  padding: 1%;
+  border-radius: 5%;
+}
+
+#token {
+  border-color: royalblue;
+  border-width: 3px;
+
+  height: 75%;
+  width: 75%;
+  margin: 2em;
+
+  font-family: 'Courier New', Courier, monospace;
+}
+
+#ballot-form {
+  width: 70%;
+}
+
+#ballot-choices {
+  width: 50%;
+  margin: 5%;
+}
+
+#cast-button {
+  background-color: darkgreen;
+}
+
+#cast-button:hover {
+  background-color: limegreen;
+}
+
+#spoil-button {
+  background-color: firebrick;
+}
+
+#spoil-button:hover {
+  background-color: red;
+}
+
+#checkout-instructions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#receipt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin: 1%;
+  padding: 1%;
+  border-radius: 5%;
+    
+  background-color: mediumpurple;
+  color: white;
+}
