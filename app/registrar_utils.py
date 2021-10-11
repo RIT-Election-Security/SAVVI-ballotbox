@@ -1,13 +1,10 @@
 from base64 import b64decode, b64encode
 from dataclasses import dataclass
 from sys import getdefaultencoding
-from urllib import parse
 from cryptography.fernet import Fernet, InvalidToken
-from json import dump, dumps, loads, JSONDecodeError
+from json import dumps, loads, JSONDecodeError
 from requests import post
 from urllib.parse import urljoin
-
-from .config import REGISTRAR_ENDIANNESS 
 
 
 @dataclass
