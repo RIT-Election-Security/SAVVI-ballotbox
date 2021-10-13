@@ -1,0 +1,13 @@
+# Ballotbox environment variables
+# All variables can also be defined in config.py or secret_config.py
+
+
+# Key shared with registrar
+# No default, so a value must be supplied
+#SHARED_KEY=
+
+# Publicly accessible URL for registrar application
+#REGISTRAR_URL="http://localhost:5000"
+
+# Publicly accessible URL for ballot server application
+#BALLOTSERVER_URL="http://localhost:8000"
