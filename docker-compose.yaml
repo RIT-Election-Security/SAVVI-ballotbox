@@ -6,3 +6,5 @@ services:
       context: .
       dockerfile: docker/Dockerfile
     env_file: docker/env_file
+    ports:
+      - 80:80
