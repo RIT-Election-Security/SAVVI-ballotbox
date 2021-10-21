@@ -2,6 +2,7 @@ from datetime import datetime
 from json import dumps, loads
 from quart import Quart, abort, redirect, request, render_template, url_for, flash, session, make_response
 from quart_auth import AuthManager, AuthUser, Unauthorized, current_user, login_user, login_required, logout_user
+from quart_cors import cors
 from secrets import token_urlsafe
 
 from .cookie import COOKIE_KEY, decrypt_cookie_str, encrypt_cookie_str
@@ -9,10 +10,8 @@ from .ballotserver_utils import SubmissionActions, get_ballot_contest_info, get_
 from .registrar_utils import announce_voter_cast_ballot, check_voter_is_elligible, parse_registrar_token
 
 app = Quart(__name__)
-AuthManager(app)
-app.secret_key = token_urlsafe(16)
-app.config["QUART_AUTH_COOKIE_NAME"] = "quart_auth_ballotbox"
 
+# Load Config files
 try:
     app.config.from_pyfile("config.py")
 except FileNotFoundError:
@@ -22,6 +21,16 @@ try:
     app.config.from_pyfile("secret_config.py")
 except FileNotFoundError:
     print("Secrets config file not found")
+
+# Wrapp app for CORS if not running on localhost
+if not (app.config.get("ALLOW_ORIGIN") == "localhost" or app.config.get("ALLOW_ORIGIN") == "127.0.0.1"):
+    app = cors(app, allow_origin=app.config.get("ALLOW_ORIGIN"), allow_methods=["GET", "POST"])
+
+# Wrap app for auth
+AuthManager(app)
+app.config["QUART_AUTH_COOKIE_NAME"] = "quart_auth_ballotbox"
+app.config["QUART_AUTH_COOKIE_SAMESITE"] = "Strict"
+app.secret_key = token_urlsafe(16)
 
 
 @app.errorhandler(Unauthorized)

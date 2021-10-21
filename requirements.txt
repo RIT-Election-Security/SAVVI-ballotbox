@@ -13,6 +13,9 @@ cryptography == 3.4.7
 # app/ballotbox.py: 4
 quart_auth == 0.5.0
 
+# app/ballotbox.py: 5
+quart_cors == 0.5.0
+
 # app/ballotserver_utils.py: 2
 # app/registrar_utils.py: 6
 requests == 2.26.0
