@@ -8,7 +8,9 @@ def runserver(host_address: str="0.0.0.0", port: int=5001, debug: bool=False, ke
     Args:
         host_address: address to bind to
         port: port number to bind to
-        debug: toggle debug mode    
+        debug: toggle debug mode
+        key: path to TLS key file
+        cert: path to TLS certificate file
     """
     if (key or cert) and not key or not cert:
         print("Both cert and key required if one presented")
