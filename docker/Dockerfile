@@ -14,13 +14,10 @@ WORKDIR /app
 COPY run.py .
 COPY app ./app
 
-# Copy in certificate/key
-COPY docker/server.key /app/server.key
-COPY docker/server.crt /app/server.crt
 COPY docker/ca.crt /app/ca.crt
 
 # Add CA cert to certifi bundle for requests
 RUN cat /app/ca.crt >> `python -c 'import certifi; print(certifi.where())'`
 
-# Run on port 0.0.0.0:443
-CMD python run.py runserver -a "0.0.0.0" -p 443 -key /app/server.key -cert /app/server.crt
+# Run on port 0.0.0.0:80
+CMD python run.py runserver -a "0.0.0.0" -p 80
