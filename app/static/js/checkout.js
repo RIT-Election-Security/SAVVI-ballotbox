@@ -4,10 +4,12 @@ function copy_element_text_by_id(element_id) {
 }
 
 function download_receipt_as_file() {
-    let verification_code = document.getElementById('receipt-verification-code').innerText
-    let timestamp = document.getElementById('receipt-timestamp').innerText
-    var text = "Verification Code: " + verification_code + "\nTime Cast: " + timestamp;
-    var file_name = verification_code + "-receipt-.txt"
+    let verification_code = document.getElementById('receipt-verification-code').innerText;
+    let unencrypted_hash = document.getElementById('unencrypted-hash').innerText;
+    let encrypted_hash = document.getElementById('encrypted-hash').innerText;
+    let timestamp = document.getElementById('receipt-timestamp').innerText;
+    var text = "Verification Code: " + verification_code + "\nUnencrypted Hash: "+ unencrypted_hash + "\nEncrypted Hash: " + encrypted_hash + "\nTime Cast: " + timestamp;
+    var file_name = verification_code + "-receipt-.txt";
     download_text_as_file(text, file_name);
 }
 
