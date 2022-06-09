@@ -19,3 +19,5 @@ quart_cors == 0.5.0
 # app/ballotserver_utils.py: 2
 # app/registrar_utils.py: 6
 requests == 2.26.0
+
+hypercorn==0.13.2

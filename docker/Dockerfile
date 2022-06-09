@@ -20,4 +20,4 @@ COPY docker/ca.crt /app/ca.crt
 RUN cat /app/ca.crt >> `python -c 'import certifi; print(certifi.where())'`
 
 # Run on port 0.0.0.0:80
-CMD python run.py runserver -a "0.0.0.0" -p 80
+CMD hypercorn --bind 0.0.0.0:80 app:app
