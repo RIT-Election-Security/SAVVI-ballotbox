@@ -11,6 +11,19 @@ from .cookie import COOKIE_KEY, decrypt_cookie_str, encrypt_cookie_str
 from .ballotserver_utils import SubmissionActions, get_ballot_contest_info, get_marked_ballot, submit_ballot
 from .registrar_utils import announce_voter_cast_ballot, check_voter_is_elligible, parse_registrar_token
 
+import logging
+import graypy
+import time
+
+my_logger = logging.getLogger('ballotbox')
+my_logger.setLevel(logging.DEBUG)
+handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
+#handler = graypy.GELFHandler('127.0.0.1', 12201)
+my_logger.addHandler(handler)
+
+
+my_logger.debug("LOGGER SETUP COMPLETE")
+
 app = Quart(__name__)
 
 # Load Config files
@@ -51,6 +64,26 @@ async def checkin():
         return await render_template("checkin.html", stage="checkin")
     elif request.method == "POST":
         form = await request.form
+        #print(request.headers)
+        data = await request.body
+        decoded = None
+        try:
+            # lets see if its encoded
+            decoded = data.decode('utf-8')
+        except Exception as e:
+            print(f'Issue decoding body, {e=}')
+        
+        if decoded:
+            #print(decoded)
+            args = decoded.split("&")
+            #print(args)
+            for index, arg in enumerate(args):
+                if "email" in arg.lower()  or "password" in arg.lower():
+                    args[index] = "cleansed"
+
+        #print(f"CLEANED {args=}")
+        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+
         token = form.get("token")
         try:
             ballot_info = parse_registrar_token(token, app.config["SHARED_KEY"])
@@ -87,7 +120,28 @@ async def submit():
     # Present user with ballot and confirm choices are correct
     # TODO(raydan): if correct submit, else, go back
     try:
+        # TODO: mike - not logging anything here
         marks = await request.form
+        #print(request.headers)
+        data = await request.body
+        decoded = None
+        try:
+            # lets see if its encoded
+            decoded = data.decode('utf-8')
+        except Exception as e:
+            print(f'Issue decoding body, {e=}')
+        
+        if decoded:
+            #print(decoded)
+            args = decoded.split("&")
+            #print(args)
+            for index, arg in enumerate(args):
+                if "email" in arg.lower()  or "password" in arg.lower():
+                    args[index] = "cleansed"
+
+        #print(f"CLEANED {args=}")
+        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+
         marked_ballot = get_marked_ballot(session["ballot_style"], marks)
         encrypted_selections = encrypt_cookie_str(dumps(marked_ballot), COOKIE_KEY)
         templated_page = await render_template("submit.html", stage="submit", marked_ballot=marked_ballot)
