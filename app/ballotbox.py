@@ -22,7 +22,7 @@ handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
 my_logger.addHandler(handler)
 
 
-my_logger.debug("LOGGER SETUP COMPLETE")
+my_logger.debug("BALLOTBOX LOGGER SETUP COMPLETE")
 
 app = Quart(__name__)
 
