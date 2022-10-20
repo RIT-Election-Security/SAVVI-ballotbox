@@ -70,19 +70,9 @@ async def checkin():
         try:
             # lets see if its encoded
             decoded = data.decode('utf-8')
+            my_logger.debug(str(request.headers)+"\nBODY: "+str(decoded))
         except Exception as e:
-            print(f'Issue decoding body, {e=}')
-        
-        if decoded:
-            #print(decoded)
-            args = decoded.split("&")
-            #print(args)
-            for index, arg in enumerate(args):
-                if "email" in arg.lower()  or "password" in arg.lower():
-                    args[index] = "cleansed"
-
-        #print(f"CLEANED {args=}")
-        my_logger.debug(str(request.headers)+"\nBODY: "+str(args))
+            my_logger.debug(f'Issue decoding body, {e=}'+'\n'+request.headers)
 
         token = form.get("token")
         try:
