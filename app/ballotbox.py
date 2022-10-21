@@ -17,8 +17,7 @@ import time
 
 my_logger = logging.getLogger('ballotbox')
 my_logger.setLevel(logging.DEBUG)
-handler = graypy.GELFHTTPHandler('127.0.0.1', port=12201)
-#handler = graypy.GELFHandler('127.0.0.1', 12201)
+handler = graypy.GELFTLSHandler('100.64.242.2', port=12201, certfile='/app/data/server.crt', keyfile='/app/data/server.key')
 my_logger.addHandler(handler)
 
 
